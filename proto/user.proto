@@ -1,40 +1,23 @@
 syntax = "proto3";
 package upb;
-
 option go_package = "github.com/dropboks/proto-user/pkg/upb";
 
-
-service AuthService {
-  rpc ValidateToken (AuthRequest) returns (AuthResponse);
-  rpc Login (LoginRequest) returns (LoginResponse);
-  rpc Register (RegisterRequest) returns (RegisterResponse);
+service UserService{
+  rpc GetUserByEmail (Email) returns (User){} // login
+  rpc CreateUser(User) returns (Status){} // register
 }
 
-message AuthRequest {
-  string token = 1;
-}
-
-message AuthResponse {
-  string user_id = 1;
-}
-
-message LoginRequest{
-  string email = 1;
-  string password = 2;
-}
-
-message LoginResponse{
-  string token = 1;
-}
-
-message RegisterRequest{
-  string fullname = 1;
+message User{
+  string fullName = 1;
   bytes image = 2;
   string email = 3;
   string password = 4;
 }
 
-message RegisterResponse{
-  string token = 1;
+message Email{
+  string email =1;
 }
 
+message Status{
+  bool success = 1;
+}
