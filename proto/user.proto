@@ -10,7 +10,7 @@ service UserService{
 message User{
   string id = 1;
   string fullName = 2;
-  bytes image = 3;
+  string image = 3;
   string email = 4;
   string password = 5;
 }

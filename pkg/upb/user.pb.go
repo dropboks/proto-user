@@ -25,7 +25,7 @@ type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	FullName      string                 `protobuf:"bytes,2,opt,name=fullName,proto3" json:"fullName,omitempty"`
-	Image         []byte                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
 	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,11 +76,11 @@ func (x *User) GetFullName() string {
 	return ""
 }
 
-func (x *User) GetImage() []byte {
+func (x *User) GetImage() string {
 	if x != nil {
 		return x.Image
 	}
-	return nil
+	return ""
 }
 
 func (x *User) GetEmail() string {
@@ -194,7 +194,7 @@ const file_user_proto_rawDesc = "" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bfullName\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
-	"\x05image\x18\x03 \x01(\fR\x05image\x12\x14\n" +
+	"\x05image\x18\x03 \x01(\tR\x05image\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\"\x1d\n" +
 	"\x05Email\x12\x14\n" +
