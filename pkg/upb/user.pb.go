@@ -218,12 +218,14 @@ const file_user_proto_rawDesc = "" +
 	"\x05Email\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\"\n" +
 	"\x06Status\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2`\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\x88\x01\n" +
 	"\vUserService\x12)\n" +
 	"\x0eGetUserByEmail\x12\n" +
 	".upb.Email\x1a\t.upb.User\"\x00\x12&\n" +
 	"\n" +
-	"CreateUser\x12\t.upb.User\x1a\v.upb.Status\"\x00B(Z&github.com/dropboks/proto-user/pkg/upbb\x06proto3"
+	"CreateUser\x12\t.upb.User\x1a\v.upb.Status\"\x00\x12&\n" +
+	"\n" +
+	"UpdateUser\x12\t.upb.User\x1a\v.upb.Status\"\x00B(Z&github.com/dropboks/proto-user/pkg/upbb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -246,10 +248,12 @@ var file_user_proto_goTypes = []any{
 var file_user_proto_depIdxs = []int32{
 	1, // 0: upb.UserService.GetUserByEmail:input_type -> upb.Email
 	0, // 1: upb.UserService.CreateUser:input_type -> upb.User
-	0, // 2: upb.UserService.GetUserByEmail:output_type -> upb.User
-	2, // 3: upb.UserService.CreateUser:output_type -> upb.Status
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 2: upb.UserService.UpdateUser:input_type -> upb.User
+	0, // 3: upb.UserService.GetUserByEmail:output_type -> upb.User
+	2, // 4: upb.UserService.CreateUser:output_type -> upb.Status
+	2, // 5: upb.UserService.UpdateUser:output_type -> upb.Status
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
