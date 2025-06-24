@@ -13,6 +13,8 @@ message User{
   string image = 3;
   string email = 4;
   string password = 5;
+  bool verified = 6;
+  bool twoFactorEnabled = 7;
 }
 
 message Email{

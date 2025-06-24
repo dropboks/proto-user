@@ -22,14 +22,16 @@ const (
 )
 
 type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FullName      string                 `protobuf:"bytes,2,opt,name=fullName,proto3" json:"fullName,omitempty"`
-	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
-	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	FullName         string                 `protobuf:"bytes,2,opt,name=fullName,proto3" json:"fullName,omitempty"`
+	Image            string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	Email            string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Password         string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
+	Verified         bool                   `protobuf:"varint,6,opt,name=verified,proto3" json:"verified,omitempty"`
+	TwoFactorEnabled bool                   `protobuf:"varint,7,opt,name=twoFactorEnabled,proto3" json:"twoFactorEnabled,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -95,6 +97,20 @@ func (x *User) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *User) GetVerified() bool {
+	if x != nil {
+		return x.Verified
+	}
+	return false
+}
+
+func (x *User) GetTwoFactorEnabled() bool {
+	if x != nil {
+		return x.TwoFactorEnabled
+	}
+	return false
 }
 
 type Email struct {
@@ -190,13 +206,15 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x03upb\"z\n" +
+	"user.proto\x12\x03upb\"\xc2\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bfullName\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
 	"\x05image\x18\x03 \x01(\tR\x05image\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\"\x1d\n" +
+	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x1a\n" +
+	"\bverified\x18\x06 \x01(\bR\bverified\x12*\n" +
+	"\x10twoFactorEnabled\x18\a \x01(\bR\x10twoFactorEnabled\"\x1d\n" +
 	"\x05Email\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\"\n" +
 	"\x06Status\x12\x18\n" +
