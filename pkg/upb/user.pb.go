@@ -157,6 +157,50 @@ func (x *Email) GetEmail() string {
 	return ""
 }
 
+type UserId struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserId) Reset() {
+	*x = UserId{}
+	mi := &file_user_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserId) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserId) ProtoMessage() {}
+
+func (x *UserId) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserId.ProtoReflect.Descriptor instead.
+func (*UserId) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserId) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 type Status struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -166,7 +210,7 @@ type Status struct {
 
 func (x *Status) Reset() {
 	*x = Status{}
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -178,7 +222,7 @@ func (x *Status) String() string {
 func (*Status) ProtoMessage() {}
 
 func (x *Status) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -191,7 +235,7 @@ func (x *Status) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Status.ProtoReflect.Descriptor instead.
 func (*Status) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{2}
+	return file_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Status) GetSuccess() bool {
@@ -216,12 +260,15 @@ const file_user_proto_rawDesc = "" +
 	"\bverified\x18\x06 \x01(\bR\bverified\x12*\n" +
 	"\x10twoFactorEnabled\x18\a \x01(\bR\x10twoFactorEnabled\"\x1d\n" +
 	"\x05Email\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\"\"\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\" \n" +
+	"\x06UserId\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"\"\n" +
 	"\x06Status\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\x88\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xb5\x01\n" +
 	"\vUserService\x12)\n" +
 	"\x0eGetUserByEmail\x12\n" +
-	".upb.Email\x1a\t.upb.User\"\x00\x12&\n" +
+	".upb.Email\x1a\t.upb.User\"\x00\x12+\n" +
+	"\x0fGetUserByUserId\x12\v.upb.UserId\x1a\t.upb.User\"\x00\x12&\n" +
 	"\n" +
 	"CreateUser\x12\t.upb.User\x1a\v.upb.Status\"\x00\x12&\n" +
 	"\n" +
@@ -239,21 +286,24 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_proto_goTypes = []any{
 	(*User)(nil),   // 0: upb.User
 	(*Email)(nil),  // 1: upb.Email
-	(*Status)(nil), // 2: upb.Status
+	(*UserId)(nil), // 2: upb.UserId
+	(*Status)(nil), // 3: upb.Status
 }
 var file_user_proto_depIdxs = []int32{
 	1, // 0: upb.UserService.GetUserByEmail:input_type -> upb.Email
-	0, // 1: upb.UserService.CreateUser:input_type -> upb.User
-	0, // 2: upb.UserService.UpdateUser:input_type -> upb.User
-	0, // 3: upb.UserService.GetUserByEmail:output_type -> upb.User
-	2, // 4: upb.UserService.CreateUser:output_type -> upb.Status
-	2, // 5: upb.UserService.UpdateUser:output_type -> upb.Status
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	2, // 1: upb.UserService.GetUserByUserId:input_type -> upb.UserId
+	0, // 2: upb.UserService.CreateUser:input_type -> upb.User
+	0, // 3: upb.UserService.UpdateUser:input_type -> upb.User
+	0, // 4: upb.UserService.GetUserByEmail:output_type -> upb.User
+	0, // 5: upb.UserService.GetUserByUserId:output_type -> upb.User
+	3, // 6: upb.UserService.CreateUser:output_type -> upb.Status
+	3, // 7: upb.UserService.UpdateUser:output_type -> upb.Status
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -270,7 +320,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_GetUserByEmail_FullMethodName = "/upb.UserService/GetUserByEmail"
-	UserService_CreateUser_FullMethodName     = "/upb.UserService/CreateUser"
-	UserService_UpdateUser_FullMethodName     = "/upb.UserService/UpdateUser"
+	UserService_GetUserByEmail_FullMethodName  = "/upb.UserService/GetUserByEmail"
+	UserService_GetUserByUserId_FullMethodName = "/upb.UserService/GetUserByUserId"
+	UserService_CreateUser_FullMethodName      = "/upb.UserService/CreateUser"
+	UserService_UpdateUser_FullMethodName      = "/upb.UserService/UpdateUser"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	GetUserByEmail(ctx context.Context, in *Email, opts ...grpc.CallOption) (*User, error)
+	GetUserByUserId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*User, error)
 	CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Status, error)
 	UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Status, error)
 }
@@ -45,6 +47,16 @@ func (c *userServiceClient) GetUserByEmail(ctx context.Context, in *Email, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, UserService_GetUserByEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) GetUserByUserId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*User, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(User)
+	err := c.cc.Invoke(ctx, UserService_GetUserByUserId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,6 +88,7 @@ func (c *userServiceClient) UpdateUser(ctx context.Context, in *User, opts ...gr
 // for forward compatibility.
 type UserServiceServer interface {
 	GetUserByEmail(context.Context, *Email) (*User, error)
+	GetUserByUserId(context.Context, *UserId) (*User, error)
 	CreateUser(context.Context, *User) (*Status, error)
 	UpdateUser(context.Context, *User) (*Status, error)
 	mustEmbedUnimplementedUserServiceServer()
@@ -90,6 +103,9 @@ type UnimplementedUserServiceServer struct{}
 
 func (UnimplementedUserServiceServer) GetUserByEmail(context.Context, *Email) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
+}
+func (UnimplementedUserServiceServer) GetUserByUserId(context.Context, *UserId) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByUserId not implemented")
 }
 func (UnimplementedUserServiceServer) CreateUser(context.Context, *User) (*Status, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
@@ -132,6 +148,24 @@ func _UserService_GetUserByEmail_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).GetUserByEmail(ctx, req.(*Email))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_GetUserByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserId)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUserByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetUserByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUserByUserId(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -182,6 +216,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserByEmail",
 			Handler:    _UserService_GetUserByEmail_Handler,
+		},
+		{
+			MethodName: "GetUserByUserId",
+			Handler:    _UserService_GetUserByUserId_Handler,
 		},
 		{
 			MethodName: "CreateUser",
