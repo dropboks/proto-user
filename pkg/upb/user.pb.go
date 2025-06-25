@@ -25,7 +25,7 @@ type User struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	FullName         string                 `protobuf:"bytes,2,opt,name=fullName,proto3" json:"fullName,omitempty"`
-	Image            string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	Image            *string                `protobuf:"bytes,3,opt,name=image,proto3,oneof" json:"image,omitempty"`
 	Email            string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	Password         string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	Verified         bool                   `protobuf:"varint,6,opt,name=verified,proto3" json:"verified,omitempty"`
@@ -79,8 +79,8 @@ func (x *User) GetFullName() string {
 }
 
 func (x *User) GetImage() string {
-	if x != nil {
-		return x.Image
+	if x != nil && x.Image != nil {
+		return *x.Image
 	}
 	return ""
 }
@@ -250,15 +250,16 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x03upb\"\xc2\x01\n" +
+	"user.proto\x12\x03upb\"\xd1\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
-	"\bfullName\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
-	"\x05image\x18\x03 \x01(\tR\x05image\x12\x14\n" +
+	"\bfullName\x18\x02 \x01(\tR\bfullName\x12\x19\n" +
+	"\x05image\x18\x03 \x01(\tH\x00R\x05image\x88\x01\x01\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x1a\n" +
 	"\bverified\x18\x06 \x01(\bR\bverified\x12*\n" +
-	"\x10twoFactorEnabled\x18\a \x01(\bR\x10twoFactorEnabled\"\x1d\n" +
+	"\x10twoFactorEnabled\x18\a \x01(\bR\x10twoFactorEnabledB\b\n" +
+	"\x06_image\"\x1d\n" +
 	"\x05Email\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\" \n" +
 	"\x06UserId\x12\x16\n" +
@@ -314,6 +315,7 @@ func file_user_proto_init() {
 	if File_user_proto != nil {
 		return
 	}
+	file_user_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
