@@ -3,20 +3,18 @@ package upb;
 option go_package = "github.com/dropboks/proto-user/pkg/upb";
 
 service UserService{
-  rpc GetUserByEmail (Email) returns (User){} // login
-  rpc GetUserByUserId (UserId) returns (User){} // mail verification
-  rpc CreateUser(User) returns (Status){} // register
-  rpc UpdateUser(User) returns (Status){} // verification, 2FA, change data
+  rpc CreateUser(User) returns (Status){} 
+  rpc UpdateUser(User) returns (Status){}
 }
 
 message User{
   string id = 1;
-  string fullName = 2;
+  string full_name = 2;
   optional string image = 3;
   string email = 4;
   string password = 5;
   bool verified = 6;
-  bool twoFactorEnabled = 7;
+  bool two_factor_enabled = 7;
 }
 
 message Email{
@@ -24,7 +22,7 @@ message Email{
 }
 
 message UserId{
-  string userId = 1;
+  string user_id = 1;
 }
 
 message Status{

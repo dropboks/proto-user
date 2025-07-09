@@ -24,12 +24,12 @@ const (
 type User struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FullName         string                 `protobuf:"bytes,2,opt,name=fullName,proto3" json:"fullName,omitempty"`
+	FullName         string                 `protobuf:"bytes,2,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 	Image            *string                `protobuf:"bytes,3,opt,name=image,proto3,oneof" json:"image,omitempty"`
 	Email            string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	Password         string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	Verified         bool                   `protobuf:"varint,6,opt,name=verified,proto3" json:"verified,omitempty"`
-	TwoFactorEnabled bool                   `protobuf:"varint,7,opt,name=twoFactorEnabled,proto3" json:"twoFactorEnabled,omitempty"`
+	TwoFactorEnabled bool                   `protobuf:"varint,7,opt,name=two_factor_enabled,json=twoFactorEnabled,proto3" json:"two_factor_enabled,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -159,7 +159,7 @@ func (x *Email) GetEmail() string {
 
 type UserId struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -250,26 +250,23 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x03upb\"\xd1\x01\n" +
+	"user.proto\x12\x03upb\"\xd4\x01\n" +
 	"\x04User\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
-	"\bfullName\x18\x02 \x01(\tR\bfullName\x12\x19\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x19\n" +
 	"\x05image\x18\x03 \x01(\tH\x00R\x05image\x88\x01\x01\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x1a\n" +
-	"\bverified\x18\x06 \x01(\bR\bverified\x12*\n" +
-	"\x10twoFactorEnabled\x18\a \x01(\bR\x10twoFactorEnabledB\b\n" +
+	"\bverified\x18\x06 \x01(\bR\bverified\x12,\n" +
+	"\x12two_factor_enabled\x18\a \x01(\bR\x10twoFactorEnabledB\b\n" +
 	"\x06_image\"\x1d\n" +
 	"\x05Email\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\" \n" +
-	"\x06UserId\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"\"\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"!\n" +
+	"\x06UserId\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\"\n" +
 	"\x06Status\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xb5\x01\n" +
-	"\vUserService\x12)\n" +
-	"\x0eGetUserByEmail\x12\n" +
-	".upb.Email\x1a\t.upb.User\"\x00\x12+\n" +
-	"\x0fGetUserByUserId\x12\v.upb.UserId\x1a\t.upb.User\"\x00\x12&\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2]\n" +
+	"\vUserService\x12&\n" +
 	"\n" +
 	"CreateUser\x12\t.upb.User\x1a\v.upb.Status\"\x00\x12&\n" +
 	"\n" +
@@ -295,16 +292,12 @@ var file_user_proto_goTypes = []any{
 	(*Status)(nil), // 3: upb.Status
 }
 var file_user_proto_depIdxs = []int32{
-	1, // 0: upb.UserService.GetUserByEmail:input_type -> upb.Email
-	2, // 1: upb.UserService.GetUserByUserId:input_type -> upb.UserId
-	0, // 2: upb.UserService.CreateUser:input_type -> upb.User
-	0, // 3: upb.UserService.UpdateUser:input_type -> upb.User
-	0, // 4: upb.UserService.GetUserByEmail:output_type -> upb.User
-	0, // 5: upb.UserService.GetUserByUserId:output_type -> upb.User
-	3, // 6: upb.UserService.CreateUser:output_type -> upb.Status
-	3, // 7: upb.UserService.UpdateUser:output_type -> upb.Status
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	0, // 0: upb.UserService.CreateUser:input_type -> upb.User
+	0, // 1: upb.UserService.UpdateUser:input_type -> upb.User
+	3, // 2: upb.UserService.CreateUser:output_type -> upb.Status
+	3, // 3: upb.UserService.UpdateUser:output_type -> upb.Status
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
